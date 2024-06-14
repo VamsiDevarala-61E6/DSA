@@ -1,0 +1,20 @@
+x = data.iloc[ : , :-1].values
+y = data.iloc[ : ,-1].values
+    
+from sklearn.model_selection import train_test_split
+
+xtrain,xtest,ytrain,ytest = train_test_split(x,y,test_size=0.25,random_state=(1))
+
+from sklearn.ensemble import RandomForestRegressor
+
+model = RandomForestRegressor(n_estimators=100)
+
+model.fit(xtrain,ytrain)
+
+from sklearn.metrics import r2_score
+
+ypred = model.predict(xtest)
+
+r2sc = r2_score(ytest, ypred)
+
+print(r2sc*100)
